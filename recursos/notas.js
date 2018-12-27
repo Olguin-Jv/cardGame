@@ -35,42 +35,45 @@ function randomCardPicker(arr, numCartas) {
 
 //DIBUJA UNA CARTA EN PANTALLA
 var card1 = this.add.sprite(game.world.centerX, game.world.centerY, 'cards');
-card1.anchor.setTo(.5,.5);
+card1.anchor.setTo(.5, .5);
 card1.frame = 2;
-    
+
 
 //FUNCION QUE DIBUJA TODAS LAS CARTAS EN PANTALLA
 var positionX = 50,
-positionY = game.world.centerY,
-limit = 0;
+    positionY = game.world.centerY,
+    limit = 0;
 
 for (var i = 0; i <= 51; i++) {
-if (limit === 13) {
-    positionX = 50;
-    positionY += 50;
-    limit = 0;
-}
-var sprite = this.add.sprite(positionX, positionY, 'cards');
-sprite.anchor.setTo(.5, .5);
+    if (limit === 13) {
+        positionX = 50;
+        positionY += 50;
+        limit = 0;
+    }
+    var sprite = this.add.sprite(positionX, positionY, 'cards');
+    sprite.anchor.setTo(.5, .5);
 
 
-limit++;
-sprite.frame = i;
-positionX += 45;
+    limit++;
+    sprite.frame = i;
+    positionX += 45;
 };
 
 function randomCardArray(spriteSheetLenght, cantCards) { //función de prueba
-    var lastCard;
-    arr = []
-for (var i = 0; i < cantCards; i++) {
-    var newCard = Math.floor(Math.random() * spriteSheetLenght) + 0;
-    if (newCard != lastCard) {
-        arr.push(newCard);
-        lastCard = newCard;
+    var lastCard,
+        arr = [];
+    for (var i = 0; i < cantCards; i++) {
+        var newCard = Math.floor(Math.random() * spriteSheetLenght) + 0;
+        if (arr.indexOf(newCard) == -1) {
+            arr.push(newCard);
+            lastCard = newCard;
+        }
+        else {
+            ++cantCards
+        }
     }
-    else { cantCards++ }
-}
-console.log(`Se eligieron ${arr.length} de un total de ${spriteSheetLenght}`);
-console.log(arr);
-console.log("loop Ended");
+    console.log(`Se eligieron ${arr.length} de un total de ${spriteSheetLenght}`);
+    console.log(arr);
+    console.log("loop Ended");
+    return arr;
 }
