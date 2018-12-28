@@ -5,47 +5,31 @@ stages.game.prototype = {
 
     preload: function () {
         this.load.spritesheet('cards', assets.mazo1, 59.92, 80.25, 52);
+        this.load.image('bg', assets.menuBackground);
     },
     create: function () {
+        
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.add.image(0,0,'bg')
         console.log("Into: GAME stage");
 
 
         this.card1;
         this.card2;
+        this.card3;
 
-        this.arr = [this.card1, this.card2];
+        this.arr = [this.card1, this.card2, this.card3];
 
-        ///////////////////////////////////////
-        var positionX = 50,
-            positionY = game.world.centerY,
-            limit = 0;
-
-        for (var i = 0; i <= 51; i++) {
-            if (limit === 13) {
-                positionX = 50;
-                positionY += 50;
-                limit = 0;
-            }
-            var sprite = this.add.sprite(positionX, positionY, 'cards');
-            sprite.anchor.setTo(.5, .5);
-
-            limit++;
-            sprite.frame = i;
-            positionX += 45;
-        };
-        ///////////////////////////////////////
         
-        setCards(52, [1, 2, 3]);
+        setCards(52, this.arr, game.world.centerY);
 
     }
 }
 
-function setCards(cant, arr) {
+function setCards(cant, arr, positionY) {
 
     var positionX = game.world.width / (arr.length + 1),
-        columnX = 0,
-        positionY = 100,
+        columnX = 0;
         frames = randomCardArray(cant, arr.length);
     console.log(`Set cards\nPositionX: ${positionX}\npositionY: ${positionY}\nFrames: ${frames}`)
 
