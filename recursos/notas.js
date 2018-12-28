@@ -72,8 +72,31 @@ function randomCardArray(spriteSheetLenght, cantCards) { //función de prueba
             ++cantCards
         }
     }
-    console.log(`Se eligieron ${arr.length} de un total de ${spriteSheetLenght}`);
-    console.log(arr);
-    console.log("loop Ended");
+    console.log(`Se eligieron ${arr.length} cartas de un total de ${spriteSheetLenght}`);
+    console.log(`La selección se hizo en un total de ${cantCards} intentos.`)
+    console.log("Loop Ended");
     return arr;
+}
+
+function drawCard(elem, x, y, frameIdx) {
+    elem = game.add.sprite(x, y, 'cards');
+    elem.anchor.setTo(.5, .5);
+    elem.frame = frameIdx;
+}
+
+
+function setCards(cant, arr) {
+
+    var positionX = game.world.width / (arr.length + 1),
+        columnX = 0,
+        positionY = 100,
+        frames = randomCardArray(cant, arr.length);
+    console.log(`Set cards\nPositionX: ${positionX}\npositionY: ${positionY}\nFrames: ${frames}`)
+
+    for (var i = 0; i < arr.length; i++) {
+        columnX += positionX;
+        console.log(`Carta puesta en X:${columnX}`);
+        drawCard(arr[i], columnX, positionY, frames[i]);
+    }
+
 }
